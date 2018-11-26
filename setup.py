@@ -2,15 +2,15 @@
 from setuptools import setup
 
 setup(
-    name='django-tinkoff-merchant',
-    version='1.0',
-    author='Oleg K',
+    name='django-tinkoff',
+    version='0.1',
+    author='Ivanov S',
     author_email='nameoff.nv@gmail.com',
-    packages=['django_tinkoff_merchant'],
-    url='https://github.com/nameoffnv/django-tinkoff-merchant',
+    packages=['django_tinkoff_'],
+    url='https://github.com/django/django-tinkoff',
     license='MIT',
     description='Tinkoff merchant integration',
-    install_requires=['django>=2.0.0', 'requests>=2.0.0'],
+    install_requires=['django>=1.8.0', 'requests>=2.0.0'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',

@@ -1,5 +1,3 @@
-from typing import List
-
 from django.db import models
 
 from .consts import TAXES, TAXATIONS
@@ -40,13 +38,13 @@ class Payment(models.Model):
     def __str__(self):
         return 'Транзакция #{self.id}:{self.order_id}:{self.payment_id}'.format(self=self)
 
-    def can_redirect(self) -> bool:
+    def can_redirect(self):
         return self.status == 'NEW' and self.payment_url
 
-    def is_paid(self) -> bool:
+    def is_paid(self):
         return self.status == 'CONFIRMED' or self.status == 'AUTHORIZED'
 
-    def with_receipt(self, email: str, taxation: str = None, phone: str = '') -> 'Payment':
+    def with_receipt(self, email, taxation=None, phone=''):
         if not self.id:
             self.save()
 
@@ -57,12 +55,12 @@ class Payment(models.Model):
 
         return self
 
-    def with_items(self, items: List[dict]) -> 'Payment':
+    def with_items(self, items):
         for item in items:
-            ReceiptItem.objects.create(**item, receipt=self.receipt)
+            ReceiptItem.objects.create(receipt=self.receipt, **item)
         return self
 
-    def to_json(self) -> dict:
+    def to_json(self):
         data = {
             'Amount': self.amount,
             'OrderId': self.order_id,
@@ -93,9 +91,9 @@ class Receipt(models.Model):
         if not self.taxation:
             self.taxation = get_config()['TAXATION']
 
-        return super().save(*args, **kwargs)
+        return super(Receipt).save(*args, **kwargs)
 
-    def to_json(self) -> dict:
+    def to_json(self):
         return {
             'Email': self.email,
             'Phone': self.phone,
@@ -126,9 +124,9 @@ class ReceiptItem(models.Model):
             self.amount = self.price * self.quantity
         if not self.tax:
             self.tax = get_config()['ITEM_TAX']
-        return super().save(*args, **kwargs)
+        return super(ReceiptItem).save(*args, **kwargs)
 
-    def to_json(self) -> dict:
+    def to_json(self):
         return {
             'Name': self.name,
             'Price': self.price,

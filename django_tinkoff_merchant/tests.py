@@ -3,7 +3,7 @@ import json
 import mock
 from django.test import Client
 from django.test import TestCase
-from django.urls import reverse
+from django.core.urlresolvers import reverse
 
 from .models import Payment, Receipt, ReceiptItem
 from .services import MerchantAPI

@@ -4,7 +4,7 @@ from .models import Payment, Receipt, ReceiptItem
 from .services import MerchantAPI
 
 
-def make_cancel(modeladmin: admin.ModelAdmin, request, qs):
+def make_cancel(modeladmin, request, qs):
     for p in qs:
         MerchantAPI().cancel(p)
         p.save()
@@ -31,7 +31,7 @@ class PaymentAdmin(admin.ModelAdmin):
         return [f.name for f in obj._meta.fields]
 
 
-class PermissionsMixin:
+class PermissionsMixin(object):
     def has_add_permission(self, request):
         return False
 
