@@ -18,25 +18,25 @@ class Payment(models.Model):
         'Details': 'details',
     }
 
-    amount = models.IntegerField(verbose_name='Сумма в копейках', editable=False)
-    order_id = models.CharField(verbose_name='Номер заказа', max_length=100, unique=True, editable=False)
-    description = models.TextField(verbose_name='Описание', max_length=250, blank=True, default='', editable=False)
+    amount = models.IntegerField(verbose_name='The amount in cents', editable=False)
+    order_id = models.CharField(verbose_name='Order number', max_length=100, unique=True, editable=False)
+    description = models.TextField(verbose_name='Description', max_length=250, blank=True, default='', editable=False)
 
-    success = models.BooleanField(verbose_name='Успешно проведен', default=False, editable=False)
-    status = models.CharField(verbose_name='Статус транзакции', max_length=20, default='', editable=False)
+    success = models.BooleanField(verbose_name='Successfully completed', default=False, editable=False)
+    status = models.CharField(verbose_name='Transaction status', max_length=20, default='', editable=False)
     payment_id = models.CharField(
-        verbose_name='Уникальный идентификатор транзакции в системе банка', max_length=20, default='', editable=False)
-    error_code = models.CharField(verbose_name='Код ошибки', max_length=20, default='', editable=False)
+        verbose_name=_('Unique identifier of the transaction in the Bank system'), max_length=20, default='', editable=False)
+    error_code = models.CharField(verbose_name=_('Error code'), max_length=20, default='', editable=False)
     payment_url = models.CharField(
-        verbose_name='Ссылка на страницу оплаты.',
-        help_text='Ссылка на страницу оплаты. По умолчанию ссылка доступна в течении 24 часов.',
+        verbose_name=_('Link to the payment page.'),
+        help_text=_('Link to the payment page. By default, the link is available within 24 hours.'),
         max_length=100, blank=True, default='', editable=False)
-    message = models.TextField(verbose_name='Краткое описание ошибки', blank=True, default='', editable=False)
-    details = models.TextField(verbose_name='Подробное описание ошибки', blank=True, default='', editable=False)
+    message = models.TextField(verbose_name=_('Brief description of the error'), blank=True, default='', editable=False)
+    details = models.TextField(verbose_name=_('Detailed description of the error'), blank=True, default='', editable=False)
 
     class Meta:
         verbose_name = 'Transaction'
-        verbose_name_plural = 'Транзакции'
+        verbose_name_plural = 'Transactions'
 
     def __unicode__(self):
         return 'Транзакция #{self.id}:{self.order_id}:{self.payment_id}'.format(self=self)
@@ -106,18 +106,18 @@ class Receipt(models.Model):
 
 
 class ReceiptItem(models.Model):
-    receipt = models.ForeignKey(to=Receipt, on_delete=models.CASCADE, verbose_name='Чек')
-    name = models.CharField(verbose_name='Наименование товара', max_length=128)
-    price = models.IntegerField(verbose_name='Цена в копейках')
-    quantity = models.DecimalField(verbose_name='Количество/вес', max_digits=20, decimal_places=3)
-    amount = models.IntegerField(verbose_name='Сумма в копейках')
-    tax = models.CharField(verbose_name='Ставка налога', max_length=10, choices=TAXES)
-    ean13 = models.CharField(verbose_name='Штрих-код', max_length=20, blank=True, default='')
-    shop_code = models.CharField(verbose_name='Код магазина', max_length=64, blank=True, default='')
+    receipt = models.ForeignKey(to=Receipt, on_delete=models.CASCADE, verbose_name=_('Check'))
+    name = models.CharField(verbose_name=_('Name of goods'), max_length=128)
+    price = models.IntegerField(verbose_name=_('Price in cents'))
+    quantity = models.DecimalField(verbose_name=_('Quantity/weight'), max_digits=20, decimal_places=3)
+    amount = models.IntegerField(verbose_name=_('The amount of cents'))
+    tax = models.CharField(verbose_name=_('Tax rate'), max_length=10, choices=TAXES)
+    ean13 = models.CharField(verbose_name=_('Barcode'), max_length=20, blank=True, default='')
+    shop_code = models.CharField(verbose_name=_('Store code'), max_length=64, blank=True, default='')
 
     class Meta:
-        verbose_name = 'Информация о товаре'
-        verbose_name_plural = 'Информация о товарах'
+        verbose_name = _('Product information')
+        verbose_name_plural = _('Product information')
 
     def __unicode__(self):
         return '{self.id} (Чек {self.receipt.id})'.format(self=self)
