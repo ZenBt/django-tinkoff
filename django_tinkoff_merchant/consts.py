@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 TAXATION_OSN = 'osn'
 TAXATION_USN_INCOME = 'usn_income'
 TAXATION_USN_INCOME_OUTCOME = 'usn_income_outcome'
