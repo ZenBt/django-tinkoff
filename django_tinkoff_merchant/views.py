@@ -1,9 +1,9 @@
 import json
 
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
-from django.views import
+from django.views.generic import View
 from django.views.decorators.csrf import csrf_exempt
 
 from .models import Payment
@@ -22,9 +22,9 @@ class Notification(View):
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
+        return super(Notification).dispatch(request, *args, **kwargs)
 
-    def post(self, request: HttpRequest, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         data = json.loads(request.body.decode())
 
         if data.get('TerminalKey') != self.merchant_api.terminal_key:
