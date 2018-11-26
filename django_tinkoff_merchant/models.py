@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from .consts import TAXES, TAXATIONS
 from .settings import get_config
@@ -76,18 +77,18 @@ class Payment(models.Model):
 
 
 class Receipt(models.Model):
-    payment = models.OneToOneField(to=Payment, on_delete=models.CASCADE, verbose_name='Платеж')
+    payment = models.OneToOneField(to=Payment, on_delete=models.CASCADE, verbose_name=_('Payment'))
     email = models.CharField(
-        verbose_name='Электронный адрес для отправки чека покупателю', max_length=64)
-    phone = models.CharField(verbose_name='Телефон покупателя', max_length=64, blank=True, default='')
-    taxation = models.CharField(verbose_name='Система налогообложения', choices=TAXATIONS, max_length=20)
+        verbose_name=_('E-mail address to send the check to the buyer'), max_length=64)
+    phone = models.CharField(verbose_name=_('Customer phone'), max_length=64, blank=True, default='')
+    taxation = models.CharField(verbose_name=_('Taxation system'), choices=TAXATIONS, max_length=20)
 
     class Meta:
-        verbose_name = 'Данные чека'
-        verbose_name_plural = 'Данные чеков'
+        verbose_name = _('Check details')
+        verbose_name_plural = _('Check data')
 
     def __unicode__(self):
-        return '{self.id} ({self.payment})'.format(self=self)
+        return '{} ({})'.format(self.id, self.payment)
 
     def save(self, *args, **kwargs):
         if not self.taxation:
