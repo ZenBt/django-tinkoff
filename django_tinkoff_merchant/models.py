@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -35,7 +35,7 @@ class Payment(models.Model):
     details = models.TextField(verbose_name='Подробное описание ошибки', blank=True, default='', editable=False)
 
     class Meta:
-        verbose_name = 'Транзакция'
+        verbose_name = 'Transaction'
         verbose_name_plural = 'Транзакции'
 
     def __unicode__(self):
