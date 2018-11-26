@@ -6,7 +6,7 @@ setup(
     version='0.1',
     author='Ivanov S',
     author_email='nameoff.nv@gmail.com',
-    packages=['django_tinkoff_'],
+    packages=['django_tinkoff_merchant'],
     url='https://github.com/django/django-tinkoff',
     license='MIT',
     description='Tinkoff merchant integration',
