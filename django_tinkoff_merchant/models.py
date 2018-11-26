@@ -37,7 +37,7 @@ class Payment(models.Model):
         verbose_name = 'Транзакция'
         verbose_name_plural = 'Транзакции'
 
-    def __str__(self):
+    def __unicode__(self):
         return 'Транзакция #{self.id}:{self.order_id}:{self.payment_id}'.format(self=self)
 
     def can_redirect(self):
@@ -86,7 +86,7 @@ class Receipt(models.Model):
         verbose_name = 'Данные чека'
         verbose_name_plural = 'Данные чеков'
 
-    def __str__(self):
+    def __unicode__(self):
         return '{self.id} ({self.payment})'.format(self=self)
 
     def save(self, *args, **kwargs):
@@ -118,7 +118,7 @@ class ReceiptItem(models.Model):
         verbose_name = 'Информация о товаре'
         verbose_name_plural = 'Информация о товарах'
 
-    def __str__(self):
+    def __unicode__(self):
         return '{self.id} (Чек {self.receipt.id})'.format(self=self)
 
     def save(self, *args, **kwargs):
