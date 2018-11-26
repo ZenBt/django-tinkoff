@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='django-tinkoff',
-    version='0.3',
+    version='0.4',
     author='Ivanov S',
     author_email='nameoff.nv@gmail.com',
     packages=['django_tinkoff_merchant'],
