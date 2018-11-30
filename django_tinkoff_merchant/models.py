@@ -94,7 +94,7 @@ class Receipt(models.Model):
         if not self.taxation:
             self.taxation = get_config()['TAXATION']
 
-        return super(Receipt).save(*args, **kwargs)
+        return super(Receipt, self).save(*args, **kwargs)
 
     def to_json(self):
         return {
@@ -127,7 +127,7 @@ class ReceiptItem(models.Model):
             self.amount = self.price * self.quantity
         if not self.tax:
             self.tax = get_config()['ITEM_TAX']
-        return super(ReceiptItem).save(*args, **kwargs)
+        return super(ReceiptItem, self).save(*args, **kwargs)
 
     def to_json(self):
         return {
