@@ -120,7 +120,7 @@ class ReceiptItem(models.Model):
         verbose_name_plural = _('Product information')
 
     def __unicode__(self):
-        return '{self.id} (Чек {self.receipt.id})'.format(self=self)
+        return '{self.id} (Check {self.receipt.id})'.format(self=self)
 
     def save(self, *args, **kwargs):
         if not self.amount:
