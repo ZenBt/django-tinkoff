@@ -62,7 +62,7 @@ class MerchantAPI(object):
                 continue
             if isinstance(value_token, bool):
                 base.append([name_token, str(value_token).lower()])
-            elif not isinstance(value_token, list) or not isinstance(value_token, dict):
+            elif not isinstance(value_token, list) and not isinstance(value_token, dict):
                 base.append([name_token, value_token])
 
         base.sort(key=lambda i: i[0])
